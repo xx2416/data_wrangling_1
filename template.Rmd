@@ -1,21 +1,37 @@
 ---
-title: "Simple document"
-output: html_document
+title: "Data Import"
+output: github_document
 ---
 
 I'm an R Markdown document! 
 
 # Section 1
 
-Here's a **code chunk** that samples from 
-a _normal distribution_:
+Import data using the `readr` package
 
 ```{r}
-samp = rnorm(100)
-length(samp)
+library(readr)
+FAS_litters <- read_csv("data_import_examples/FAS_litters.csv")
+FAS_litters <- janitor::clean_names(FAS_litters)
 ```
 
-# Section 2
+look at the data
+```{r, eval=FALSE}
+View(FAS_litters)
+skimr::skim(FAS_litters)
+```
+
+`read_csv` options
+```{r}
+read_csv("data_import_examples/FAS_litters.csv", na=c("","NA",999,888),skip = 2)
+```
+
+import other file formats
+```{r}
+
+```
+
+
 
 I can take the mean of the sample, too!
 The mean is `r mean(samp)`.
