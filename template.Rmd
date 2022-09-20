@@ -26,12 +26,24 @@ skimr::skim(FAS_litters)
 read_csv("data_import_examples/FAS_litters.csv", na=c("","NA",999,888),skip = 2)
 ```
 
-import other file formats
-```{r}
+## import other file formats
 
+we need to 
+```{r}
+library(readxl)
+mlb_df=read_excel("data_import_examples/mlb11.xlsx")
 ```
 
+```{r, eval=FALSE}
+View(mlb_df)
+```
 
+```{r}
+lotr_words_df=read_excel("data_import_examples/LotR_Words.xlsx")
+```
 
-I can take the mean of the sample, too!
-The mean is `r mean(samp)`.
+read in a SAS dataset
+```{r}
+library(haven)
+pulse_df<-read_sas("data_import_examples/public_pulse_data.sas7bdat")
+```
