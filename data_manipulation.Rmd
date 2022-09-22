@@ -1,0 +1,61 @@
+---
+title: "Data_manipulation"
+output: html_document
+date: "2022-09-22"
+---
+
+```{r echo=FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  fig.width = 6,
+  fig.asp = .6,
+  out.width = "90%"
+)
+```
+
+## Data Manipulation with `dplyr`
+
+Once you've imported data, you're going to do some cleaning up 
+```{r example}
+library(tidyverse)
+
+options(tibble.print_min=3)
+litters_data = read_csv("./data_import_examples/FAS_litters.csv")
+litters_data = janitor::clean_names(litters_data)
+pups_data = read_csv("./data_import_examples//FAS_pups.csv")
+pups_data = janitor::clean_names(pups_data)
+```
+
+### select
+You can specify the columns you want to keep by naming all of them
+```{r select}
+select(litters_data,group, litter_number, gd0_weight, pups_born_alive)
+```
+```{r}
+select(litters_data,group:gd_of_birth)
+```
+
+###mutate 
+```{r}
+mutate(litters_data,
+  wt_gain = gd18_weight - gd0_weight,
+  group = str_to_lower(group),
+ # wt_gain_kg = wt_gain * 2.2
+)
+
+```
+
+###arrange
+```{r}
+head(arrange(litters_data, group, pups_born_alive), 10)
+
+```
+### `%>%`
+
+*define intermediate datasets
+*nest function calls
+```{r}
+
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
